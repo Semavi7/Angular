@@ -18,4 +18,9 @@ export class Home {
       this.router.navigate(["about"]);
       this.router.navigateByUrl("/about");
     }
+
+    logOut(){
+      localStorage.removeItem("token");
+      this.router.navigateByUrl("/login");
+    }
 }

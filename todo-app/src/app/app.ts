@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { SearchPipe } from './search-pipe';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, SearchPipe],
   template: `
   <h1>Todo App</h1>
   @if (!isUpdateWorkFormActive) {
@@ -23,8 +24,10 @@ import { FormsModule } from '@angular/forms';
   }
   <hr>
   <div>
+    <input type="search" [(ngModel)]="search" placeholder="Search something..."/>
+    <hr/>
     <ul>
-      @for (data of todos; track data) {
+      @for (data of todos | search:search; track data) {
         <li>
           {{data}}
           @if (!isUpdateWorkFormActive) {
@@ -44,23 +47,24 @@ export class App {
   updateIndex: number = 0;
   todos: string[] = [];
   isUpdateWorkFormActive: boolean = false;
+  search: string = "";
 
-  save(){
+  save() {
     this.todos.push(this.work);
     this.work = "";
   }
 
-  delete(index: number){
-    this.todos.splice(index,1);
+  delete(index: number) {
+    this.todos.splice(index, 1);
   }
 
-  get(index: number){
+  get(index: number) {
     this.updateIndex = index;
     this.updateWork = this.todos[index];
     this.isUpdateWorkFormActive = true;
   }
 
-  update(){
+  update() {
     this.todos[this.updateIndex] = this.updateWork;
     this.isUpdateWorkFormActive = false;
   }

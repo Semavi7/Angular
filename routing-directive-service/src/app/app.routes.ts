@@ -4,6 +4,8 @@ import { About } from './about/about';
 import { Contact } from './contact/contact';
 import { Layout } from './layout/layout';
 import { Login } from './login/login';
+import { authGuard } from './auth-guard';
+import { checkGuard } from './check-guard';
 
 export const homeRoute: Route = {
     path: "",
@@ -17,12 +19,14 @@ export const routes: Routes = [
     },
     {
         path: "",
+        canActivate: [authGuard],
         component: Layout,
         children: [
             homeRoute
             ,
             {
                 path: "home",
+                canDeactivate: [checkGuard],
                 component: Home
             },
             {

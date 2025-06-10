@@ -15,7 +15,7 @@ export class Login {
     private router: Router
   ){}
   signin() {
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl("/home");
   }
 
   
