@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { Renklendir } from '../renklendir';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -11,8 +12,18 @@ import { Renklendir } from '../renklendir';
 })
 export class Home {
     constructor(
-      private router: Router
-    ){}
+      private router: Router,
+      private _http: HttpClient
+    ){
+      this._http.get("https://jsonplaceholder.typicode.com/todos/1").subscribe({
+        next: (res: any) => {
+          console.log(res);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err)
+        }
+      });
+    }
 
     method(){
       this.router.navigate(["about"]);
