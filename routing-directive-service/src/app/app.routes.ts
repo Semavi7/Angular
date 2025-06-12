@@ -15,32 +15,36 @@ export const homeRoute: Route = {
 export const routes: Routes = [
     {
         path: "login",
-        component: Login
+        loadComponent: () => import("./login/login").then(c => c.Login)
     },
     {
         path: "",
         canActivate: [authGuard],
-        component: Layout,
+        loadComponent: () => import("./layout/layout").then(c => c.Layout),
         children: [
             homeRoute
             ,
             {
                 path: "home",
                 canDeactivate: [checkGuard],
-                component: Home
+                loadComponent: () => import("./home/home").then(c => c.Home)
             },
             {
                 path: "about",
-                component: About
+                loadComponent: () => import("./about/about").then(c => c.About)
             },
             {
                 path: "contact",
-                component: Contact
+                loadComponent: () => import("./contact/contact").then(c => c.Contact)
             },
             {
                 path: "contact/:params",
-                component: Contact
+                loadComponent: () => import("./contact/contact").then(c => c.Contact)
             }
         ]
+    },
+    {
+        path: "**",
+        loadComponent: () => import("./notfount/notfount").then(c => c.Notfount)
     }
 ];
