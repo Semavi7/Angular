@@ -10,7 +10,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home {
+export default class Home {
     constructor(
       private router: Router,
       private _http: HttpClient
@@ -23,6 +23,7 @@ export class Home {
           console.log(err)
         }
       });
+      this._http.get("https://jsonplaceholder.typicode.com/todos/1").subscribe((res: any) => console.log(res));
     }
 
     method(){

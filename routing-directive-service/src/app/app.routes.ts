@@ -1,5 +1,5 @@
 import { Route, Routes } from '@angular/router';
-import { Home } from './home/home';
+import  Home  from './home/home';
 import { About } from './about/about';
 import { Contact } from './contact/contact';
 import { Layout } from './layout/layout';
@@ -27,7 +27,7 @@ export const routes: Routes = [
             {
                 path: "home",
                 canDeactivate: [checkGuard],
-                loadComponent: () => import("./home/home").then(c => c.Home)
+                loadComponent: () => import("./home/home")
             },
             {
                 path: "about",
